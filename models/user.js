@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const argon2 = require('argon2');
 
 const Schema = mongoose.Schema;
 
@@ -47,20 +47,20 @@ userSchema.set('toObject', {
 // compares passwords
 userSchema.methods.authenticated = function(password) {
     console.log('comparing passwords', password, this.password)
-    return bcrypt.compareSync(password, this.password);
+    return argon2.verify(this.password, password);
 }
 
 // hashes passwords before saving to the database
 userSchema.pre('save', function(next) {
-    console.log('presave', this)
     if (this.isNew) {
-        console.log('this.password', this.password)
-        let hash = bcrypt.hashSync(this.password, 12);
-        console.log('hash', hash)
-        this.password = hash;
-        console.log('this', this)
+        (async () => {
+            this.password = await argon2.hash(this.password);
+            next();
+        })()
+    } else {
+        next()
     }
-    next();
+
 })
 
 module.exports = mongoose.model('User', userSchema);

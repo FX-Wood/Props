@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/sangchoi/project3",
   "dependencies": {
-    "bcrypt": "^3.0.5",
+    "argon2": "^0.30.3",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
