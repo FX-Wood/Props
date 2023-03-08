@@ -1,4 +1,4 @@
-# project3
+# Props
 
 FX Wood
 Sang Choi
