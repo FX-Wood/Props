@@ -1,8 +1,6 @@
-#port for express to listen on
-EXPRESS_PORT=3001
+PORT=3001
 
 #something complex and unguessable to seed JWT tokens with
 JWT_SECRET=secretkeywithlotsofdigitsandnumbersandsymbols
 
-#name for the mongo database -- it will be created when mongoose connects to mongo
-PROPS_DB=propsdb
+MONGODB_URI=
