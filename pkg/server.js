@@ -28,9 +28,6 @@ const signupLimiter = new RateLimit({
   }),
 });
 
-// For Dev
-// mongoose.connect('mongodb://localhost/' + process.env.PROPS_DB, {useNewUrlParser: true});
-// For Production
 mongoose.connect(process.env.MONGODB_URI);
 
 const db = mongoose.connection;
