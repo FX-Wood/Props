@@ -28,7 +28,7 @@ export default class Login extends Component {
     console.log("Logging in...");
     e.preventDefault();
     axios
-      .post("/auth/login", {
+      .post("/api/auth/login", {
         email: this.state.email,
         password: this.state.password,
       })

@@ -9,7 +9,7 @@
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
+    "react-scripts": "^5.0.1",
     "recharts": "^1.5.0",
     "socket.io": "^2.2.0"
   },
@@ -28,5 +28,4 @@
     "not ie <= 11",
     "not op_mini all"
   ]
-  
 }
