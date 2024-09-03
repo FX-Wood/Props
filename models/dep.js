@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const depSchema = new Schema({
-    name: String,
-    members: [{type: Schema.Types.ObjectId, ref: 'User'}]
+  name: String,
+  members: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 
-module.exports = mongoose.model('Dep', depSchema);
+module.exports = mongoose.model("Dep", depSchema);
