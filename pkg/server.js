@@ -2,31 +2,10 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const expressJWT = require("express-jwt");
-const RateLimit = require("express-rate-limit");
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-const loginLimiter = new RateLimit({
-  windowMs: 5 * 60 * 1000, // 5 minutes
-  max: 3,
-  delayMs: 0, // disabled
-  message: JSON.stringify({
-    type: "error",
-    message: "Maximum login attempts exceeded!",
-  }),
-});
-
-const signupLimiter = new RateLimit({
-  windowMs: 60 * 60 * 1000,
-  max: 3,
-  delayMs: 0, // disabled
-  message: JSON.stringify({
-    type: "error",
-    message: "Account creation maximum exceeded!",
-  }),
-});
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -37,10 +16,6 @@ db.on("open", () => {
 db.on("error", (err) => {
   console.log(`Database error:\n${err}`);
 });
-
-// rate limiters
-app.use("/auth/login", loginLimiter);
-app.use("/auth/signup", signupLimiter);
 
 // protects resources from non-token bearers
 app.use(
