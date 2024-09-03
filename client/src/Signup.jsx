@@ -36,7 +36,7 @@ export default class Signup extends Component {
     console.log("signing up...");
     e.preventDefault();
     axios
-      .post("/auth/signup", {
+      .post("/api/auth/signup", {
         name: this.state.name,
         email: this.state.email,
         password: this.state.password,

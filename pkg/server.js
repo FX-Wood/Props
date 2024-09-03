@@ -7,7 +7,6 @@ const RateLimit = require("express-rate-limit");
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static(__dirname + "/client/build"));
 
 const loginLimiter = new RateLimit({
   windowMs: 5 * 60 * 1000, // 5 minutes
@@ -55,8 +54,10 @@ app.use(
   ),
 );
 
+app.get("/api/alive", (req, res) => res.json({ message: "props api v1" }));
+
 // controller mounts
-app.use("/auth", require("./routes/auth"));
+app.use("/api/auth", require("./routes/auth"));
 app.use("/api/user", require("./routes/user"));
 app.use("/api/props", require("./routes/props"));
 app.use("/api/deps", require("./routes/dep"));
@@ -64,13 +65,4 @@ app.use("/api/profile", require("./routes/profile"));
 app.use("/api/chat", require("./routes/chat"));
 app.use("/api/seed", require("./routes/seedDb.js"));
 
-app.get("*", function (req, res) {
-  res.sendFile(__dirname + "/client/build/index.html");
-});
-
-app.listen(process.env.PORT, () => {
-  console.log(
-    `You're listening to the sweet sounds of ${process.env.PORT} PROPS in the morning...`,
-  );
-  console.log(`Oh, and the port is`, process.env.PORT);
-});
+module.exports = app;
